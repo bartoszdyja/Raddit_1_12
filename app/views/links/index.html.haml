@@ -1,0 +1,60 @@
+%p#notice=notice
+%h1
+  %span.glyphicon.glyphicon-send{style: :"font-size:48px;"}  
+  Listing links
+
+-@links.each do |link|
+  .well
+    .panel.panel-primary
+      .panel-heading
+        .panel-title=link_to link.title, link
+      .panel-body
+        =link.url
+      .panel-footer
+        %button.btn.btn-primary 
+          Likes
+          %span.badge=link.get_likes.size
+        -if user_signed_in?
+          .pull-right
+            =link_to "Edit", edit_link_path(link)
+            =link_to "Delete", link, method: :delete
+          
+        
+        
+          
+        
+          
+  
+
+
+-#<p id="notice"><%= notice %></p>
+
+-#<h1>Listing Links</h1>
+-#-#<table>
+-#  <thead>
+-#    <tr>
+-#      <th>Title</th>
+-#      <th>Url</th>
+-#      <th colspan="3"></th>
+-#    </tr>
+-#  </thead>
+-#
+-#  <tbody>
+-#    <% @links.each do |link| %>
+-#      <tr>
+-#        <td><%= link.title %></td>
+-#        <td><%= link.url %></td>
+-#        <td><%= link_to 'Show', link %></td>
+-#        <td><%= link_to 'Edit', edit_link_path(link) %></td>
+-#        <td><%= link_to 'Destroy', link, method: :delete %></td>
+-#        <td><%=link.get_likes.size%></td>
+-#        <td><%=link_to 'Upvote', like_link_path(link), method: :put %></td>
+-#        <td><%=link_to 'Downvote', dislike_link_path(link), method: :put %></td>
+-#      </tr>
+-#    <% end %>
+-#  </tbody>
+-#</table>
+
+-#<br>
+
+
