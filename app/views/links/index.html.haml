@@ -11,14 +11,16 @@
       .panel-body
         =link.url
       .panel-footer
-        %button.btn.btn-primary 
-          Likes
-          %span.badge=link.get_likes.size
+        =link_to raw("Likes <span class='badge'>#{link.get_likes.size}</span>"), like_link_path(link), method: :put, class: "button btn btn-primary"
         -if user_signed_in?
           .pull-right
             =link_to "Edit", edit_link_path(link)
             =link_to "Delete", link, method: :delete
-          
+      =link_to 'Upvote', like_link_path(link), method: :put 
+      =link_to 'Downvote', dislike_link_path(link), method: :put
+      
+        
+
         
         
           
