@@ -1,25 +1,29 @@
-%p#notice=notice
+
 %h1
   %span.glyphicon.glyphicon-send{style: :"font-size:48px;"}  
   Listing links
 
+/ -@links.each do |link|
+/   .well
+/     .panel.panel-primary
+/       %h2=link_to link.title, link
+/       .panel-body
+/         %p=link.url
+/         %h6.pull-right
+/           Added by #{link.user.email} #{time_ago_in_words(link.created_at)} ago
+/       .panel-footer
+/         =link_to raw("Likes <span class='badge'>#{link.get_likes.size}</span>"), like_link_path(link), method: :put, class: "button btn btn-primary"
+/         =link_to "Visit link", "http://www.yahoo.com", class: "button btn btn-primary"
+/         -if user_signed_in?
+/           .pull-right
+/             =link_to "Edit", edit_link_path(link)
+/             =link_to "Delete", link, method: :delete
+     
 -@links.each do |link|
-  .well
-    .panel.panel-primary
-      .panel-heading
-        .panel-title=link_to link.title, link
-      .panel-body
-        =link.url
-      .panel-footer
-        =link_to raw("Likes <span class='badge'>#{link.get_likes.size}</span>"), like_link_path(link), method: :put, class: "button btn btn-primary"
-        -if user_signed_in?
-          .pull-right
-            =link_to "Edit", edit_link_path(link)
-            =link_to "Delete", link, method: :delete
-      =link_to 'Upvote', like_link_path(link), method: :put 
-      =link_to 'Downvote', dislike_link_path(link), method: :put
+  %h2=link_to link.title, link
+  %%h6 Added by #{link.user.email} #{time_ago_in_words(link.created_at)} ago
       
-        
+    
 
         
         

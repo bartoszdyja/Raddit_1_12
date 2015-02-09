@@ -1,0 +1,15 @@
+%h1
+	=link_to @link.title, url_with_protocol(@link.url), target: '_blank'
+%p
+	%span.glyphicon.glyphicon-home
+	=@link.url
+
+= link_to 'Edit', edit_link_path(@link)
+= link_to 'Back', links_path
+
+-@comments.each do |comment|
+	%h3
+		=comment.body
+	%p
+		Added by
+		=comment.user.email

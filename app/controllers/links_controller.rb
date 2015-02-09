@@ -11,6 +11,8 @@ class LinksController < ApplicationController
   # GET /links/1
   # GET /links/1.json
   def show
+
+    @comments = @link.comments.order("created_at DESC").all
   end
 
   # GET /links/new
@@ -26,6 +28,8 @@ class LinksController < ApplicationController
   # POST /links.json
   def create
     @link = Link.new(link_params)
+    @user = current_user
+    @link.user_id = @user.id
 
     respond_to do |format|
       if @link.save
@@ -65,8 +69,12 @@ class LinksController < ApplicationController
   def upvote
     @link =Link.find(params[:id])
     @user = current_user
-    @link.liked_by @user
-    redirect_to root_path
+    if user_signed_in?
+      @link.liked_by @user
+      redirect_to root_path, notice: 'You liked this.'
+    else
+      redirect_to new_user_session_path, notice: 'You need to be logged in to vote.'
+    end 
   end
 
   def downvote
