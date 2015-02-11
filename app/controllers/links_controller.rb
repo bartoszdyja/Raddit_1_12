@@ -5,13 +5,19 @@ class LinksController < ApplicationController
   # GET /links
   # GET /links.json
   def index
-    @links = Link.order("created_at DESC").all
+    
+    if params[:sort]
+      @p=params[:sort]
+      @t=params[:type]
+      @links = Link.order("#{@t} #{@p}").all
+    else
+      @links = Link.order("created_at DESC").all
+    end
   end
 
   # GET /links/1
   # GET /links/1.json
   def show
-
     @comments = @link.comments.order("created_at DESC").all
   end
 
@@ -71,7 +77,8 @@ class LinksController < ApplicationController
     @user = current_user
     if user_signed_in?
       @link.liked_by @user
-      redirect_to root_path, notice: 'You liked this.'
+      flash.now[:notice] = 'You liked this.'
+      render :show
     else
       redirect_to new_user_session_path, notice: 'You need to be logged in to vote.'
     end 

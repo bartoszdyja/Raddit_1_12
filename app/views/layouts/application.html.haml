@@ -19,7 +19,20 @@
 				-if user_signed_in?
 					%ul.nav.navbar-nav.pull-right
 						%li=link_to "Add new link", new_link_path 
+						%li.dropdown
+							%a{:href=>"#", :class=>"dropdown-toggle", "data-toggle"=>"dropdown"}Top<b class="caret"></b>
+							%ul.dropdown-menu
+								%li
+									%a{:href => root_path(sort: "DESC", type: "created_at")} Newest
+								%li
+									%a{:href => root_path(sort: "ASC", type: "created_at")} Oldest
+								%li
+									%a{:href => root_path(sort: "ASC", type: "cached_votes_score")} Least likes
+								%li
+									%a{:href => root_path(sort: "DESC", type: "cached_votes_score")} Most likes
+							
 						%li=link_to "Sign Out", destroy_user_session_path, method: :delete
+						
 				-else
 					%ul.nav.navbar-nav.pull-right
 						%li=link_to "Sign In", new_user_session_path
@@ -29,10 +42,5 @@
 	-if alert	
 		%alert.alert-danger=alert
 	.col.md-9.col-md-offset-1#container=yield
-			
-			
-  
-		    
-								
 
 	

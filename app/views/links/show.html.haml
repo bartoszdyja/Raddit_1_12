@@ -4,12 +4,25 @@
 	%span.glyphicon.glyphicon-home
 	=@link.url
 
-= link_to 'Edit', edit_link_path(@link)
-= link_to 'Back', links_path
+=link_to raw("Likes <span class='badge'>#{@link.get_likes.size}</span>"), like_link_path(@link), method: :put, class: "button btn btn-primary"
 
--@comments.each do |comment|
-	%h3
-		=comment.body
-	%p
-		Added by
-		=comment.user.email
+.btn-group
+	.button.btn.btn-primary 
+		=link_to "Visit Link", url_with_protocol(@link.url), target: '_blank'
+	%button.btn.btn-default 2
+	%button.btn.btn-default 3
+
+/ = link_to 'Edit', edit_link_path(@link)
+/ = link_to 'Back', links_path
+
+/ -@comments.each do |comment|
+/ 	%h3
+/ 		=comment.body
+/ 	%p
+/ 		Added by
+/ 		=comment.user.email
+
+
+
+	
+		

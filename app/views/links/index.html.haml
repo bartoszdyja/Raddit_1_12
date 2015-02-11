@@ -3,6 +3,7 @@
   %span.glyphicon.glyphicon-send{style: :"font-size:48px;"}  
   Listing links
 
+
 / -@links.each do |link|
 /   .well
 /     .panel.panel-primary
@@ -20,7 +21,11 @@
 /             =link_to "Delete", link, method: :delete
      
 -@links.each do |link|
-  %h2=link_to link.title, link
+  %h2
+    =link_to link.title, link 
+    %small
+      %span.glyphicon.glyphicon-thumbs-up
+      =link.get_likes.size
   %%h6 Added by #{link.user.email} #{time_ago_in_words(link.created_at)} ago
       
     
