@@ -4,14 +4,30 @@
 	%span.glyphicon.glyphicon-home
 	=@link.url
 
+
+%p
 =link_to raw("Likes <span class='badge'>#{@link.get_likes.size}</span>"), like_link_path(@link), method: :put, class: "button btn btn-primary"
 
-.btn-group
+.btn-group.pull-right
 	.button.btn.btn-primary 
-		=link_to "Visit Link", url_with_protocol(@link.url), target: '_blank'
-	%button.btn.btn-default 2
-	%button.btn.btn-default 3
-
+		=link_to "Visit Link", url_with_protocol(@link.url), target: '_blank', class: "bu_raddit"
+	.button.btn.btn-default
+		= link_to 'Edit', edit_link_path(@link)
+	.button.btn.btn-default
+		= link_to 'Back', links_path
+.clearfix
+%h2.col-md-3.col-md-offset-1
+	-if @link.comments.count>0
+		Comments	
+		-@link.comments.each do |com|
+			%p=com.body
+			%p.col-md-offset-3=com.user.email
+			-if com.user == current_user
+				.button.btn.btn-default.btn-xs.col-md-offset-12
+					=link_to 'Destroy comment', links_path
+	-else
+		No comments
+		%p=link_to 'Be first to add new comment', root_path
 / = link_to 'Edit', edit_link_path(@link)
 / = link_to 'Back', links_path
 

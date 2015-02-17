@@ -15,3 +15,48 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+h2 a:visited
+	{
+	color: #337ab7
+	}
+
+a:visited.button.btn.btn-primary	
+	{
+	color: #ffffff
+	}
+
+a.button.btn-group.btn-primary
+	{
+	color: #ffffff
+	}
+
+h1
+	{
+		color: #042642
+	}
+
+.navbar
+	{
+	background-color: #77859E;
+	}
+
+.navbar-default .navbar-brand
+	{
+	color: #ffffff
+	}
+
+.navbar-default .navbar-nav li a
+	{
+	color: #ffffff
+	}
+.navbar-default .navbar-toggle .icon-bar 
+	{
+	background-color: #FFF;
+	}
+
+a.bu_raddit
+{
+	color: #ffffff
+}
+
